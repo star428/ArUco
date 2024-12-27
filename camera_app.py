@@ -5,6 +5,8 @@ from PIL import Image, ImageTk
 import os
 import argparse
 
+# example：python camera_app.py --output_dir calibration_checkerboard
+
 parser = argparse.ArgumentParser(description="Camera App")
 parser.add_argument("--output_dir", type=str, default="photos", help="Directory to save photos")
 args = parser.parse_args()
@@ -32,9 +34,8 @@ def take_photo():
         photo_path = os.path.join(output_dir, f"photo_{photo_count}.jpg")
         cv2.imwrite(photo_path, frame)
         photo_count += 1
-        messagebox.showinfo("Success", f"Photo taken and saved as {photo_path}")
     else:
-        messagebox.showerror("Error", "Failed to take photo")
+        messagebox.showerror("Error", "Cannot take photo")
 
 cap = cv2.VideoCapture(1) # 调整系统摄像头编号
 if not cap.isOpened():
